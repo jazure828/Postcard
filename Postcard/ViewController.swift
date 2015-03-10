@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var enterNameTextField: UITextField!
     @IBOutlet weak var enterMessageTextField: UITextField!
     
+    @IBOutlet weak var funLabel: UILabel!
     @IBOutlet weak var sendMailButton: UIButton!
     
     override func viewDidLoad() {
@@ -28,12 +29,28 @@ class ViewController: UIViewController {
 
     @IBAction func sendMailButtonPressed(sender: UIButton) {
         messageLabel.hidden = false
-        messageLabel.text = enterNameTextField.text
+        var newLabelText = "Hello "
+        newLabelText += enterNameTextField.text + "\n"
+        newLabelText += enterMessageTextField.text
+        messageLabel.text = newLabelText
+        
+        funLabel.hidden = false
+        var funLabelText = ""
+        
+        // code to reverse characters in a string
+        for letter in enterNameTextField.text {
+            funLabelText = "\(letter)" + funLabelText
+        }
+        funLabel.text = funLabelText.capitalizedString
         
         enterNameTextField.text = ""
         enterNameTextField.resignFirstResponder()
         
-        sendMailButton.setTitle("Happy", forState: UIControlState.Normal)
+        enterMessageTextField.text = ""
+        enterMessageTextField.resignFirstResponder()
+
+        
+        sendMailButton.setTitle("Happily Sent", forState: UIControlState.Normal)
         
     }
 
